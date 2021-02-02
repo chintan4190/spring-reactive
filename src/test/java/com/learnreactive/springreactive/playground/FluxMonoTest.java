@@ -10,7 +10,12 @@ public class FluxMonoTest {
     @Test
     void fluxTest(){
         Flux<String> stringFlux = Flux.just("spring", "boot", "reactive");
-        stringFlux.subscribe(System.out::println);
+        //stringFlux.subscribe(System.out::println);
+        StepVerifier.create(stringFlux.log())
+                .expectNext("spring")
+                .expectNext("boot")
+                .expectNext("reactive")
+                .verifyComplete();
     }
 
     @Test
